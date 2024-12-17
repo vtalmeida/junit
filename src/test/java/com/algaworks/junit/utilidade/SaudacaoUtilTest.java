@@ -8,29 +8,41 @@ class SaudacaoUtilTest {
 
     @Test
     public void saudarDia() {
-        assertEquals("Bom dia", SaudacaoUtil.saudar(9));
+        // Arrange
+        int horaValida = 9;
+
+        // Act
+        String saudacao = SaudacaoUtil.saudar(horaValida);
+
+        // Assert
+        assertEquals("Bom dia", saudacao);
     }
 
     @Test
     public void saudarTarde() {
-        assertEquals("Boa tarde", SaudacaoUtil.saudar(16));
+        int horaValida = 16;
+        String saudacao = SaudacaoUtil.saudar(horaValida);
+        assertEquals("Boa tarde", saudacao);
     }
 
     @Test
     public void saudarNoite() {
-        assertEquals("Boa noite", SaudacaoUtil.saudar(21));
+        int horaValida = 21;
+        String saudacao = SaudacaoUtil.saudar(horaValida);
+        assertEquals("Boa noite", saudacao);
     }
 
     @Test
     public void deveLancarException() {
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> SaudacaoUtil.saudar(-10));
-
-        assertEquals("Hora inválida", illegalArgumentException.getMessage());
+        int horaInvalida = -10;
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> SaudacaoUtil.saudar(horaInvalida));
+        assertEquals("Hora inválida", e.getMessage());
     }
 
     @Test
     public void naoDeveLancarException() {
-        assertDoesNotThrow(() -> SaudacaoUtil.saudar(0));
+        int horaValida = 0;
+        assertDoesNotThrow(() -> SaudacaoUtil.saudar(horaValida));
     }
 
 }
