@@ -14,8 +14,7 @@ public class SaudacaoUtil {
         } else if(hora >= 18 && hora <= 23) {
             return "Boa noite";
         }
-        return null;
-//        throw new IllegalArgumentException("Hora inválida");
+        throw new IllegalArgumentException("Hora inválida");
     }
 
 }
