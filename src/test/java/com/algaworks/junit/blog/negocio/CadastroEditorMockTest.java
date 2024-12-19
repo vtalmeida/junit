@@ -35,7 +35,7 @@ public class CadastroEditorMockTest {
     class CadastroComEditorValido {
 
         @Spy
-        Editor editor = new Editor(null, "Alex", "alex@email.com", BigDecimal.TEN, true);
+        Editor editor = EditorTestData.umEditorNovo();
 
         @BeforeEach
         void init() {
@@ -91,7 +91,7 @@ public class CadastroEditorMockTest {
             Mockito.when(armazenamentoEditor.encontrarPorEmail("alex@email.com"))
                     .thenReturn(Optional.empty())
                     .thenReturn(Optional.of(editor));
-            Editor editorComEmailExistente = new Editor(null, "Alex", "alex@email.com", BigDecimal.TEN, true);
+            Editor editorComEmailExistente = EditorTestData.umEditorNovo();
             cadastroEditor.criar(editor);
             assertThrows(RegraNegocioException.class, ()-> cadastroEditor.criar(editorComEmailExistente));
         }
@@ -119,7 +119,7 @@ public class CadastroEditorMockTest {
     @Nested
     class EdicaoComEditorValido {
         @Spy
-        Editor editor = new Editor(1L, "Alex", "alex@email.com", BigDecimal.TEN, true);
+        Editor editor = EditorTestData.umEditorExistente();
 
         @BeforeEach
         void init() {
@@ -128,8 +128,11 @@ public class CadastroEditorMockTest {
         }
 
         @Test
-        void Dado_um_editor_valido_Quando_editar_Entao_deve_alterar_editor_salvo() {
-            Editor editorAtualizado = new Editor(1L, "Alex Silva", "alex.silva@email.com", BigDecimal.ZERO, false);
+        void dado_um_editor_valido_Quando_editar_Entao_deve_alterar_editor_salvo() {
+            Editor editorAtualizado = EditorTestData.umEditorExistente();
+            editorAtualizado.setEmail("alex.silva@email.com");
+            editorAtualizado.setNome("Alex Silva");
+
             cadastroEditor.editar(editorAtualizado);
             Mockito.verify(editor, times(1)).atualizarComDados(editorAtualizado);
 
@@ -142,7 +145,7 @@ public class CadastroEditorMockTest {
     @Nested
     class EdicaoComEditorInexistente {
 
-        Editor editor = new Editor(99L, "Alex", "alex@email.com", BigDecimal.TEN, true);
+        Editor editor = EditorTestData.umEditorComIdInexistente();
 
         @BeforeEach
         void init() {
