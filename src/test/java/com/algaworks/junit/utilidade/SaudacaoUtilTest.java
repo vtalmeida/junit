@@ -16,6 +16,7 @@ class SaudacaoUtilTest {
     public void saudarDia() {
         // Arrange
         int horaValida = 9;
+        String saudacaoCorreta = "Bom dia";
 
         // Act
         String saudacao = SaudacaoUtil.saudar(horaValida);
@@ -24,11 +25,16 @@ class SaudacaoUtilTest {
 //        assertEquals("Bom dia", saudacao);
 
         // Utilizando o AssertJ
-        Assertions.assertThat(saudacao)
+//        Assertions.assertThat(saudacao)
 //                .withFailMessage("Saudação incorreta!")
 //                .isNotNull()
 //                .isNotBlank()
-                .isEqualTo("Bom dia");
+//                .isEqualTo("Bom dia");
+
+        Assertions.assertThat(saudacao)
+                .as("Validando se saudção é %s", saudacao)
+                .withFailMessage("Erro: Saudação incorreta! Resultado: %s", saudacao)
+                .isEqualTo(saudacaoCorreta);
     }
 
     @Test
