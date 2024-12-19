@@ -1,5 +1,6 @@
 package com.algaworks.junit.utilidade;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,14 @@ class SaudacaoUtilTest {
         String saudacao = SaudacaoUtil.saudar(horaValida);
 
         // Assert
-        assertEquals("Bom dia", saudacao);
+//        assertEquals("Bom dia", saudacao);
+
+        // Utilizando o AssertJ
+        Assertions.assertThat(saudacao)
+//                .withFailMessage("Saudação incorreta!")
+//                .isNotNull()
+//                .isNotBlank()
+                .isEqualTo("Bom dia");
     }
 
     @Test
