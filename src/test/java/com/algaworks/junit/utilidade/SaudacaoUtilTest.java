@@ -32,10 +32,10 @@ class SaudacaoUtilTest {
 //                .isNotBlank()
 //                .isEqualTo("Bom dia");
 
-        Condition<String> bomDia = new Condition<>((str) -> str.equals(saudacaoCorreta),
-                "igual a %s", saudacaoCorreta);
+//        Condition<String> bomDia = new Condition<>((str) -> str.equals(saudacaoCorreta),
+//                "igual a %s", saudacaoCorreta);
 
-        Assertions.assertThat(saudacao).is(bomDia);
+        Assertions.assertThat(saudacao).is(SaudacaoUtilConditions.igualBomDia());
 
 //       Assertions.assertThat(saudacao)
 //               .as("Validando se saudção é %s", saudacao)
